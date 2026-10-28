@@ -19,21 +19,14 @@ export function VideoSection() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldLoadVideo(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "0px" }
-    );
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShouldLoadVideo(true);
+      }
+    };
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -94,6 +87,7 @@ export function VideoSection() {
             referrerPolicy="strict-origin-when-cross-origin"
             tabIndex={-1}
             loading="lazy"
+            inert
           />
         )}
       </div>

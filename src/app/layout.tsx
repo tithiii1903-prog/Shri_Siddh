@@ -112,7 +112,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `if(typeof window!=="undefined"&&"scrollRestoration" in window.history){window.history.scrollRestoration="manual";}if(typeof window!=="undefined"&&!window.location.hash){window.scrollTo(0,0);}`,
+            __html: `if(typeof window!=="undefined"){if("scrollRestoration" in window.history){window.history.scrollRestoration="manual";}window.addEventListener("pageshow",function(){if(!window.location.hash){window.scrollTo(0,0);}});if(!window.location.hash){window.scrollTo(0,0);}}`,
           }}
         />
         <script
