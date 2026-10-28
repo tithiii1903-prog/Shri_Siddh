@@ -1,26 +1,212 @@
 @import "tailwindcss";
 
+/* ============================================================
+   DESIGN TOKENS — sourced from Figma "Shri Siddh - Web"
+   ============================================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colors */
+  --color-cream: rgba(255, 242, 208, 1);
+  --color-cream-dark: rgba(255, 242, 208, 1);
+  --color-cream-light: rgba(255, 242, 208, 1);
+  --color-espresso: #1a1208;
+  --color-brown-dark: #2c221e;
+  --color-brown-mid: #5c4a3e;
+  --color-gold: #b8933f;
+  --color-gold-light: #c9a96e;
+  --color-gold-dark: #9a7a32;
+  --color-green: #22c55e;
+  --color-green-dark: #16a34a;
+  --color-white: #ffffff;
+  --color-review-bg: #f0e8cf;
+
+  /* Typography */
+  --font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-body: var(--font-inter), Inter, system-ui, sans-serif;
+
+  /* Spacing */
+  --section-py: clamp(4rem, 8vw, 7rem);
+  --container-max: 1280px;
+  --container-px: clamp(1.25rem, 4vw, 5rem);
+
+  /* Motion */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 350ms;
+  --duration-slow: 600ms;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px -4px rgba(26, 18, 8, 0.12);
+  --shadow-card-hover: 0 12px 40px -8px rgba(26, 18, 8, 0.22);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--color-cream);
+  --color-espresso: var(--color-espresso);
+  --color-gold: var(--color-gold);
+  --color-green-cta: var(--color-green);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-heading);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-espresso);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   SKIP LINK (Accessibility)
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 9999;
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-espresso);
+  color: var(--color-cream);
+  font-weight: 600;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  outline: 2px solid var(--color-gold);
+}
+
+/* ============================================================
+   SCROLL PROGRESS BAR
+   ============================================================ */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-gold-dark), var(--color-gold-light));
+  transform-origin: left;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+.heading-display {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.heading-section {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  line-height: 1.15;
+  color: var(--color-espresso);
+}
+
+.label-text {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brown-mid);
+}
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+.container-site {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-px);
+}
+
+/* ============================================================
+   GOLD UNDERLINE ANIMATION
+   ============================================================ */
+.gold-underline {
+  position: relative;
+  display: inline-block;
+}
+.gold-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+  transition: width var(--duration-slow) var(--ease-luxury);
+}
+.gold-underline.in-view::after {
+  width: 3rem;
+}
+
+/* ============================================================
+   FOCUS STYLES
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 3px;
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }
