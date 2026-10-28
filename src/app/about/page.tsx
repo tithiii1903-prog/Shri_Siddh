@@ -21,9 +21,7 @@ const stats = [
 export default function AboutPage() {
   return (
     <div className="bg-[#FAF9F5]">
-      {/* ──────────────── 1. Hero Banner ──────────────── */}
       <section className="relative min-h-[420px] md:min-h-[500px] flex items-end justify-between overflow-hidden pt-28 pb-12 md:pb-16">
-        {/* Background Dining / Sanctuary View */}
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1920&q=85"
@@ -32,14 +30,11 @@ export default function AboutPage() {
             priority
             className="object-cover object-center"
           />
-          {/* Dark luxury gradient overlays matching Image 1 */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/45" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
         </div>
 
-        {/* Hero Content */}
         <div className="container-site relative z-10 w-full flex flex-col md:flex-row md:items-end justify-between gap-8">
-          {/* Left Title Box */}
           <div className="max-w-xl">
             <span className="inline-block text-xs md:text-sm font-semibold tracking-widest text-[#c9a96e] uppercase mb-3">
               Our Story
@@ -54,7 +49,6 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Right Ratings Strip matching Image 1 */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 bg-black/40 backdrop-blur-md px-5 py-3 border border-white/15">
             <div className="flex items-center gap-2">
               <div className="flex items-center text-[#c9a96e]">
@@ -80,11 +74,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ──────────────── 2. Our Story / A Hotel Built to Last ──────────────── */}
       <section className="py-20 md:py-28" aria-labelledby="about-story-heading">
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Left Column: Story Copy */}
             <div className="lg:col-span-6 flex flex-col">
               <span className="text-xs font-semibold tracking-widest text-[#c9a96e] uppercase mb-2">
                 Our Story
@@ -113,7 +105,6 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Right Column: Hotel Architecture Exterior Image */}
             <div className="lg:col-span-6">
               <div className="relative h-[380px] sm:h-[460px] md:h-[520px] w-full overflow-hidden shadow-sm border border-[#EDE4D5]">
                 <Image
@@ -128,7 +119,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ──────────────── 3. Stats Strip ──────────────── */}
       <section className="py-12 md:py-16 bg-[#FFF8E7] border-y border-[#EEDFCD]" aria-label="Key Hotel Statistics">
         <div className="container-site">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center md:text-left">
@@ -151,9 +141,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ──────────────── 4. Hotel Services / Everything You Need ──────────────── */}
       <section className="relative py-24 md:py-32 overflow-hidden" aria-label="Services overview">
-        {/* Full-width luxury bedroom backdrop */}
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1920&q=80"
@@ -164,7 +152,6 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        {/* Overlapping Card Container */}
         <div className="container-site relative z-10">
           <div className="bg-[#FFF8E7] p-8 sm:p-12 md:p-16 shadow-xl border border-[#EEDFCD] max-w-5xl mx-auto">
             <span className="text-xs font-semibold tracking-widest text-neutral-500 uppercase block mb-2">
@@ -199,10 +186,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ──────────────── 5. Video Section ──────────────── */}
       <VideoSection />
 
-      {/* ──────────────── 6. Hotel Facilities ──────────────── */}
       <section className="py-20 md:py-28 bg-[#FAF9F5]" aria-labelledby="facilities-heading">
         <div className="container-site">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
@@ -222,7 +207,6 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* 5-Column Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {facilities.map((facility) => (
               <div

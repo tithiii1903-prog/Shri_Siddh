@@ -9,15 +9,10 @@ interface RevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-  /** Direction from which the element enters */
   from?: "bottom" | "left" | "right" | "none";
   once?: boolean;
 }
 
-/**
- * Scroll-reveal wrapper using Framer Motion.
- * Respects prefers-reduced-motion.
- */
 export function Reveal({
   children,
   className,

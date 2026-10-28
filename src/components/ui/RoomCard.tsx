@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { BedDouble, Users, Maximize2, ArrowRight } from "lucide-react";
+import { BedDouble, Users, Maximize2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { type Room } from "@/data/rooms";
 import { cn } from "@/lib/utils";
@@ -22,7 +22,6 @@ export function RoomCard({ room, className }: RoomCardProps) {
         className
       )}
     >
-      {/* Image */}
       <div className="relative h-64 sm:h-72 overflow-hidden">
         <Image
           src={room.image}
@@ -31,9 +30,7 @@ export function RoomCard({ room, className }: RoomCardProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 ease-[var(--ease-luxury)] group-hover:scale-110"
         />
-        {/* Hover overlay */}
         <div className="absolute inset-0 bg-[var(--color-espresso)]/0 group-hover:bg-[var(--color-espresso)]/25 transition-colors duration-500" />
-        {/* View details button slide-in */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <motion.div
             initial={{ y: 12 }}
@@ -45,9 +42,7 @@ export function RoomCard({ room, className }: RoomCardProps) {
         </div>
       </div>
 
-      {/* Card body */}
       <div className="flex flex-col gap-3 p-5">
-        {/* Tier + price */}
         <div className="flex items-center justify-between">
           <span className="label-text">{room.tier}</span>
           <span className="text-xs text-[var(--color-brown-mid)]">
@@ -60,12 +55,10 @@ export function RoomCard({ room, className }: RoomCardProps) {
           </span>
         </div>
 
-        {/* Name */}
         <h3 className="font-serif font-bold text-xl text-[var(--color-espresso)] leading-tight">
           {room.name}
         </h3>
 
-        {/* Amenity icons */}
         <div className="flex items-center gap-5 text-xs text-[var(--color-brown-mid)] mt-1">
           <span className="flex items-center gap-1.5">
             <Maximize2 size={14} strokeWidth={1.5} />
@@ -82,7 +75,6 @@ export function RoomCard({ room, className }: RoomCardProps) {
         </div>
       </div>
 
-      {/* Invisible full-card link for accessibility */}
       <Link
         href={room.href}
         className="absolute inset-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold)]"

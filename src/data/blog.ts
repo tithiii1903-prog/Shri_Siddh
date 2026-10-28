@@ -180,7 +180,6 @@ export const blogPosts: BlogPost[] = [
   },
 ];
 
-/** The 12 blog cards for the blogs listing page (4 rows of 3 cards matching Image 1) */
 export const blogGridList = [
   { ...blogPosts[0], gridKey: "blog-grid-1" },
   { ...blogPosts[1], gridKey: "blog-grid-2" },

@@ -12,7 +12,6 @@ export function FindYourRoom() {
       aria-labelledby="rooms-heading"
     >
       <div className="container-site">
-        {/* Header row */}
         <div className="flex items-end justify-between gap-6 mb-10 flex-wrap">
           <Reveal>
             <SectionHeading
@@ -27,7 +26,6 @@ export function FindYourRoom() {
           </Reveal>
         </div>
 
-        {/* Cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {rooms.map((room, i) => (
             <Reveal key={room.id} delay={i * 0.12} from="bottom">

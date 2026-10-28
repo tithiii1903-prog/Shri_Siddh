@@ -35,7 +35,6 @@ export function BlogPreview() {
           {blogPosts.map((post, i) => (
             <Reveal key={post.id} delay={i * 0.1} from="bottom">
               <article className="group flex flex-col bg-white shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow duration-500">
-                {/* Image */}
                 <div className="relative h-52 overflow-hidden">
                   <Image
                     src={post.image}
@@ -48,7 +47,6 @@ export function BlogPreview() {
                     {post.category}
                   </div>
                 </div>
-                {/* Content */}
                 <div className="flex flex-col gap-3 p-5 flex-1">
                   <time
                     dateTime={post.date}

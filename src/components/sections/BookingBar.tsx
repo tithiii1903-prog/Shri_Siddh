@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
-import { Calendar, Users, Minus, Plus, MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { useState } from "react";
+import { Calendar, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatDate, formatDisplayDate } from "@/lib/utils";
 
@@ -30,34 +29,9 @@ export function BookingBar() {
   const [openPicker, setOpenPicker] = useState<OpenPicker>(null);
   const [minDateStr, setMinDateStr] = useState<string>("");
 
-  useEffect(() => {
-    const today = new Date();
-    setMinDateStr(formatDate(today));
-  }, []);
-
-  const validate = (): boolean => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const next: ValidationErrors = {};
-    if (!booking.checkin) next.checkin = "Please select a check-in date";
-    else if (booking.checkin < today) next.checkin = "Check-in cannot be in the past";
-    if (!booking.checkout) next.checkout = "Please select a check-out date";
-    else if (booking.checkin && booking.checkout <= booking.checkin)
-      next.checkout = "Check-out must be after check-in";
-    if (booking.guests < 1) next.guests = "At least 1 guest required";
-    if (booking.guests > 10) next.guests = "Maximum 10 guests";
-    setErrors(next);
-    return Object.keys(next).length === 0;
-  };
-
-  const handleBook = () => {
-    if (!validate()) return;
-    const params = new URLSearchParams({
-      checkin: formatDate(booking.checkin!),
-      checkout: formatDate(booking.checkout!),
-      guests: String(booking.guests),
-    });
-    window.location.href = `/rooms?${params}`;
+  const openDatePicker = (picker: "checkin" | "checkout") => {
+    setMinDateStr(formatDate(new Date()));
+    setOpenPicker((prev) => (prev === picker ? null : picker));
   };
 
   const handleDateSelect = (type: "checkin" | "checkout", dateStr: string) => {
@@ -79,31 +53,28 @@ export function BookingBar() {
       aria-label="Room booking form"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
-        {/* Check-in */}
         <DateField
           label="Check in Date"
           value={booking.checkin}
           error={errors.checkin}
           minDate={minDateStr}
           isOpen={openPicker === "checkin"}
-          onOpen={() => setOpenPicker(openPicker === "checkin" ? null : "checkin")}
+          onOpen={() => openDatePicker("checkin")}
           onSelect={(d) => handleDateSelect("checkin", d)}
           onClose={() => setOpenPicker(null)}
         />
 
-        {/* Check-out */}
         <DateField
           label="Check out Date"
           value={booking.checkout}
           error={errors.checkout}
           minDate={booking.checkin ? formatDate(booking.checkin) : minDateStr}
           isOpen={openPicker === "checkout"}
-          onOpen={() => setOpenPicker(openPicker === "checkout" ? null : "checkout")}
+          onOpen={() => openDatePicker("checkout")}
           onSelect={(d) => handleDateSelect("checkout", d)}
           onClose={() => setOpenPicker(null)}
         />
 
-        {/* Guests */}
         <div className="relative border border-[#d5d5d5] px-4 py-2.5 flex items-center justify-between min-h-[50px] bg-white">
           <span className="text-sm text-[#444] font-normal">Guest</span>
           <div className="flex items-center gap-2.5">
@@ -130,7 +101,6 @@ export function BookingBar() {
           )}
         </div>
 
-        {/* Booking Enquiry button */}
         <div className="flex items-stretch">
           <a
             href={whatsappUrl}
@@ -152,7 +122,6 @@ export function BookingBar() {
   );
 }
 
-/* ──────────────── Date Field ──────────────── */
 function DateField({
   label,
   value,
@@ -172,8 +141,6 @@ function DateField({
   onSelect: (date: string) => void;
   onClose: () => void;
 }) {
-  const min = minDate;
-
   return (
     <div className="relative">
       <button
@@ -192,7 +159,6 @@ function DateField({
       {error && (
         <p className="absolute -bottom-5 left-0 text-red-500 text-[11px]" role="alert">{error}</p>
       )}
-      {/* Popover */}
       {isOpen && (
         <>
           <div className="fixed inset-0 z-10" onClick={onClose} aria-hidden="true" />
@@ -203,7 +169,7 @@ function DateField({
           >
             <input
               type="date"
-              min={min}
+              min={minDate}
               className="block p-2 border border-[var(--color-cream-dark)] text-sm text-[var(--color-espresso)] focus:outline-none focus:border-[var(--color-gold)]"
               onChange={(e) => {
                 if (e.target.value) onSelect(e.target.value);

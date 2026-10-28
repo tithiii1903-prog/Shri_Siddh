@@ -36,7 +36,6 @@ export function Footer() {
       role="contentinfo"
     >
       <div className="container-site py-16">
-        {/* Centered Golden Brand Logo matching Image 3 */}
         <div className="flex flex-col items-center justify-center mb-12">
           <Link
             href="/"
@@ -54,9 +53,7 @@ export function Footer() {
           </Link>
         </div>
 
-        {/* 4 Column Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 text-sm">
-          {/* 1. Navigate */}
           <div>
             <h3 className="font-bold text-[#1a1208] mb-4 text-sm tracking-wide">
               Navigate
@@ -95,7 +92,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* 2. Legal */}
           <div>
             <h3 className="font-bold text-[#1a1208] mb-4 text-sm tracking-wide">
               Legal
@@ -114,7 +110,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* 3. Contact */}
           <div>
             <h3 className="font-bold text-[#1a1208] mb-4 text-sm tracking-wide">
               Contact
@@ -134,13 +129,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* 4. Social */}
           <div>
             <h3 className="font-bold text-[#1a1208] mb-4 text-sm tracking-wide">
               Social
             </h3>
             <div className="flex items-center gap-3">
-              {/* Instagram */}
               <a
                 href="https://instagram.com"
                 target="_blank"
@@ -150,7 +143,6 @@ export function Footer() {
               >
                 <InstagramIcon size={16} />
               </a>
-              {/* Facebook */}
               <a
                 href="https://facebook.com"
                 target="_blank"
@@ -160,7 +152,6 @@ export function Footer() {
               >
                 <FacebookIcon size={16} />
               </a>
-              {/* YouTube */}
               <a
                 href="https://youtube.com"
                 target="_blank"
@@ -174,7 +165,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom copyright line */}
         <div className="mt-14 pt-6 border-t border-[#E8DCC4] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#7b6b5e]">
           <p>© {year} Shri Siddh. All rights reserved.</p>
           <p>Crafted By : Kontent Kraft Digital</p>

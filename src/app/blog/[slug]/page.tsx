@@ -35,14 +35,11 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     notFound();
   }
 
-  // Related posts (all other posts or the 3 core posts)
   const relatedPosts = blogPosts;
 
   return (
     <div className="bg-[#FAF9F5]">
-      {/* ──────────────── Article Main Container ──────────────── */}
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 md:pt-36 pb-20">
-        {/* 1. Top Feature Image with Bottom-Right Meta Box matching Image 2 */}
         <div className="relative h-[340px] sm:h-[440px] md:h-[500px] w-full overflow-hidden border border-[#EDE4D5] shadow-xs">
           <Image
             src={post.image}
@@ -52,7 +49,6 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             className="object-cover"
           />
 
-          {/* Meta Box anchored at bottom right */}
           <div className="absolute right-0 bottom-0 z-10 bg-[#FFF8E7] border-t border-l border-[#EEDFCD] p-5 sm:p-6 min-w-[200px] sm:min-w-[240px] shadow-md flex flex-col gap-2.5">
             <div className="flex items-center justify-between gap-4 text-xs">
               <span className="text-neutral-500 font-medium">Author</span>
@@ -69,12 +65,10 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           </div>
         </div>
 
-        {/* 2. Main Title */}
         <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-900 tracking-tight leading-[1.15] mt-8 mb-8">
           {post.title}
         </h1>
 
-        {/* 3. Article Content Part 1 */}
         <div className="flex flex-col gap-8 text-sm sm:text-base text-neutral-700 leading-relaxed">
           {post.sectionsPart1.map((section, idx) => (
             <div key={idx} className="flex flex-col gap-3.5">
@@ -88,7 +82,6 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           ))}
         </div>
 
-        {/* 4. Mid-Article Two-Photo Gallery matching Image 2 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 my-10">
           {post.midImages.map((imgSrc, imgIdx) => (
             <div
@@ -105,7 +98,6 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           ))}
         </div>
 
-        {/* 5. Article Content Part 2 */}
         <div className="flex flex-col gap-8 text-sm sm:text-base text-neutral-700 leading-relaxed">
           {post.sectionsPart2.map((section, idx) => (
             <div key={idx} className="flex flex-col gap-3.5">
@@ -119,7 +111,6 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           ))}
         </div>
 
-        {/* 6. Related Articles Grid matching Image 2 bottom */}
         <section className="mt-20 pt-16 border-t border-[#E8DCC4]" aria-label="Related articles">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {relatedPosts.map((related) => (

@@ -160,7 +160,6 @@ export const rooms: Room[] = [
   },
 ];
 
-/** The 9 room cards for the rooms page grid (repeats the 3 core tiers exactly as pictured in Image 1) */
 export const roomsGridList = [
   { ...rooms[0], gridKey: "grid-1" },
   { ...rooms[1], gridKey: "grid-2" },

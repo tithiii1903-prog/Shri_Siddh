@@ -3,6 +3,7 @@
 > An editorial, ultra-responsive digital hospitality experience built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Framer Motion**.
 
 ---
+## Live Deployed link - https://shri-siddh.vercel.app/ 
 
 ## 🌟 Executive Summary
 

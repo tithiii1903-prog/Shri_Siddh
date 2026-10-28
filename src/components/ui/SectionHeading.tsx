@@ -7,7 +7,6 @@ interface SectionHeadingProps {
   light?: boolean;
 }
 
-/** Section heading with optional label above and animated gold underline */
 export function SectionHeading({
   label,
   heading,

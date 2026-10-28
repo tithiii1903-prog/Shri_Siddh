@@ -1,11 +1,9 @@
 "use client";
-import Link from "next/link";
+
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { Star, X } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
-
-
 
 interface GalleryItemData {
   src: string;
@@ -16,7 +14,6 @@ interface GalleryItemData {
 }
 
 const galleryItems: GalleryItemData[] = [
-  // Row 1: Wide (2 cols), Portrait (1 col), Portrait (1 col)
   {
     src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793165771/home_page.png",
     alt: "Hotel facade and grand lobby entrance",
@@ -38,7 +35,6 @@ const galleryItems: GalleryItemData[] = [
     category: "Heritage",
     span: "lg:col-span-1",
   },
-  // Row 2: Portrait (1 col, 400x500), Portrait (1 col), Wide (2 cols)
   {
     src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167007/f867bf494ac30e8ad11e1c7e4e4c825dd0c205d9.png",
     alt: "Luxury bedroom suite with arched architectural headboard",
@@ -81,7 +77,6 @@ const galleryItems: GalleryItemData[] = [
     category: "Heritage",
     span: "lg:col-span-1",
   },
-  // Row 2: Portrait (1 col, 400x500), Portrait (1 col), Wide (2 cols)
   {
     src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167007/f867bf494ac30e8ad11e1c7e4e4c825dd0c205d9.png",
     alt: "Luxury bedroom suite with arched architectural headboard",
@@ -110,9 +105,7 @@ export default function GalleryPage() {
 
   return (
     <div className="bg-[#FAF9F5]">
-      {/* ──────────────── Hero Banner ──────────────── */}
       <section className="relative min-h-[420px] md:min-h-[500px] flex items-end justify-between overflow-hidden pt-28 pb-12 md:pb-16">
-        {/* Background Lobby Architecture Scene */}
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1920&q=85"
@@ -121,34 +114,26 @@ export default function GalleryPage() {
             priority
             className="object-cover object-center"
           />
-          {/* Dark luxury gradient overlays matching Image 2 */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/45" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
         </div>
 
-        {/* Content: Left title box + Right ratings strip */}
         <div className="container-site relative z-10 w-full flex flex-col md:flex-row md:items-end justify-between gap-8">
-          {/* Left Title Box (Frosted look matching Image 2) */}
           <div className="max-w-xl">
-            {/* Tag Badge */}
             <span className="inline-block px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-xs font-medium text-white tracking-wider uppercase mb-3">
               Shri Siddh
             </span>
 
-            {/* Title */}
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-3">
               A Look Inside
             </h1>
 
-            {/* Subtitle */}
             <p className="text-white/85 text-sm sm:text-base md:text-lg font-light leading-relaxed">
               Rooms, dining, and spaces worth seeing before you arrive.
             </p>
           </div>
 
-          {/* Right Ratings Strip matching Image 2 */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 bg-black/40 backdrop-blur-md px-5 py-3 border border-white/15">
-            {/* Stars + Score */}
             <div className="flex items-center gap-2">
               <div className="flex items-center text-[#c9a96e]">
                 {[...Array(5)].map((_, i) => (
@@ -160,7 +145,6 @@ export default function GalleryPage() {
               </span>
             </div>
 
-            {/* Platform Badges */}
             <div className="flex items-center gap-4 text-[11px] text-white/70 font-medium">
               <span className="hover:text-white transition-colors">Google</span>
               <span>•</span>
@@ -174,18 +158,20 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* ──────────────── Photo Mosaic Grid ──────────────── */}
       <section className="py-16 md:py-24" aria-label="Photo Gallery Grid">
-        <Reveal delay={0.15}>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-                    {galleryItems.map((item, index) => (
-                      <GalleryCard key={index} item={item} />
-                    ))}
-                  </div>
-                </Reveal>
+        <div className="container-site">
+          <Reveal delay={0.15}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+              {galleryItems.map((item, index) => (
+                <div key={index} onClick={() => setActivePhoto(item)} className="cursor-pointer">
+                  <GalleryCard item={item} />
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
       </section>
 
-      {/* ──────────────── Lightbox Modal ──────────────── */}
       {activePhoto && (
         <div
           role="dialog"
@@ -194,7 +180,6 @@ export default function GalleryPage() {
           className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
           onClick={() => setActivePhoto(null)}
         >
-          {/* Close button */}
           <button
             onClick={() => setActivePhoto(null)}
             aria-label="Close photo preview"
@@ -203,7 +188,6 @@ export default function GalleryPage() {
             <X size={22} />
           </button>
 
-          {/* Image Container */}
           <div
             className="relative max-w-5xl max-h-[85vh] w-full h-[75vh]"
             onClick={(e) => e.stopPropagation()}
@@ -223,12 +207,13 @@ export default function GalleryPage() {
     </div>
   );
 }
+
 function GalleryCard({ item }: { item: GalleryItemData }) {
-  const cardRef = useRef<HTMLAnchorElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [coords, setCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     setCoords({
@@ -238,8 +223,7 @@ function GalleryCard({ item }: { item: GalleryItemData }) {
   };
 
   return (
-    <Link
-      href="/gallery"
+    <div
       ref={cardRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -247,7 +231,6 @@ function GalleryCard({ item }: { item: GalleryItemData }) {
       className={`relative group overflow-hidden block ${item.span} h-[260px] sm:h-[320px] lg:h-[360px] cursor-pointer bg-[#e8deca] shadow-xs`}
       aria-label={`${item.category}: ${item.title}`}
     >
-      {/* Zooming background image on hover */}
       <Image
         src={item.src}
         alt={item.alt}
@@ -256,10 +239,8 @@ function GalleryCard({ item }: { item: GalleryItemData }) {
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
       />
 
-      {/* Smooth dark vignette overlay on hover */}
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-colors duration-400" />
 
-      {/* Kathy Kato Cursor-Tracking Floating Badge (KRQOKY) */}
       <div
         className="absolute top-0 left-0 pointer-events-none z-20 transition-opacity duration-300 hidden md:block"
         style={{
@@ -278,7 +259,6 @@ function GalleryCard({ item }: { item: GalleryItemData }) {
         </div>
       </div>
 
-      {/* Mobile/Touch Fallback Label */}
       <div className="md:hidden absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-white">
         <span className="text-[10px] font-bold tracking-widest text-[#e8c872] uppercase block mb-0.5">
           {item.category}
@@ -287,6 +267,6 @@ function GalleryCard({ item }: { item: GalleryItemData }) {
           {item.title}
         </h3>
       </div>
-    </Link>
+    </div>
   );
 }

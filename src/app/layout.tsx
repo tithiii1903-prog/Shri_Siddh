@@ -62,7 +62,6 @@ export const metadata: Metadata = {
   },
 };
 
-// JSON-LD structured data
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Hotel",

@@ -1,12 +1,11 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { Play, Pause, Volume2, VolumeX, Maximize2 } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
 import { motion } from "framer-motion";
 
-// Luxury hotel room walkthrough ambient showcase video (The Capitol Kempinski Hotel | The Terrace Room)
 const VIDEO_ID = "u6QDeejM0M4";
 const AUTOPLAY_EMBED = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1`;
 const FULL_VIDEO = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0`;
@@ -43,7 +42,6 @@ export function VideoSection() {
       className="relative h-[65vh] min-h-[420px] max-h-[720px] w-full overflow-hidden bg-black"
       aria-label="Hotel experience showcase video"
     >
-      {/* 1. Autoplaying Background Video Stream (Indra Kumar: Auto play video) */}
       <div className="absolute inset-0 w-full h-full pointer-events-none scale-105">
         <iframe
           ref={iframeRef}
@@ -56,7 +54,6 @@ export function VideoSection() {
         />
       </div>
 
-      {/* 2. Fallback Poster Layer (Figma bedroom from Image 2) */}
       <div className="absolute inset-0 -z-10">
         <Image
           src="https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167007/f867bf494ac30e8ad11e1c7e4e4c825dd0c205d9.png"
@@ -68,10 +65,8 @@ export function VideoSection() {
         />
       </div>
 
-      {/* Subtle vignette overlay */}
       <div className="absolute inset-0 bg-black/25 pointer-events-none" />
 
-      {/* 3. Center Play/Pause & Fullscreen Button from Figma */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <motion.button
           ref={triggerRef}
@@ -83,9 +78,7 @@ export function VideoSection() {
         </motion.button>
       </div>
 
-      {/* 4. Ambient Video Controls Bar (Bottom Right) */}
       <div className="absolute bottom-6 right-6 z-20 flex items-center gap-3">
-        {/* Play / Pause Toggle */}
         <button
           onClick={togglePlay}
           aria-label={isPlaying ? "Pause video" : "Play video"}
@@ -94,7 +87,6 @@ export function VideoSection() {
           {isPlaying ? <Pause size={16} /> : <Play size={16} className="ml-0.5" />}
         </button>
 
-        {/* Mute / Unmute Toggle */}
         <button
           onClick={toggleMute}
           aria-label={isMuted ? "Unmute audio" : "Mute audio"}
@@ -103,7 +95,6 @@ export function VideoSection() {
           {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
         </button>
 
-        {/* Fullscreen Modal trigger */}
         <button
           onClick={() => setIsModalOpen(true)}
           aria-label="Open fullscreen cinema view"
@@ -113,7 +104,6 @@ export function VideoSection() {
         </button>
       </div>
 
-      {/* Fullscreen Video Modal */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} triggerRef={triggerRef}>
         <div className="relative aspect-video w-full bg-black">
           {isModalOpen && (

@@ -15,15 +15,19 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(pathname);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
 
-  // Scroll behavior with rAF throttle
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setMenuOpen(false);
+  }
+
   useEffect(() => {
     const update = () => {
       const y = window.scrollY;
       setScrolled(y > 80);
-      // Hide on scroll down, show on scroll up
       if (y > lastScrollY.current && y > 200) {
         setHidden(true);
       } else {
@@ -44,12 +48,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close menu on route change
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  // Lock body scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -86,7 +84,6 @@ export function Navbar() {
           className="container-site flex items-center justify-between h-16 md:h-20"
           aria-label="Main navigation"
         >
-          {/* Left links — desktop only */}
           <div className="hidden lg:flex items-center gap-8 flex-1">
             {navLeft.map((item) => (
               <NavLink
@@ -100,7 +97,6 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Logo — centered on desktop (using user requested /logo.png) */}
           <Link
             href="/"
             className="flex items-center gap-2.5 lg:absolute lg:left-1/2 lg:-translate-x-1/2"
@@ -108,7 +104,7 @@ export function Navbar() {
           >
             <div className="flex flex-col items-center">
               <Image
-                src="/logo_footer.png"
+                src="/logo.png"
                 alt="Shri Siddh"
                 width={150}
                 height={38}
@@ -121,7 +117,6 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Right links — desktop only */}
           <div className="hidden lg:flex items-center gap-8 flex-1 justify-end">
             {navRight.map((item) => (
               <NavLink
@@ -135,7 +130,6 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Mobile hamburger */}
           <button
             className="lg:hidden ml-auto p-2 -mr-2 rounded"
             onClick={() => setMenuOpen((v) => !v)}
@@ -158,7 +152,6 @@ export function Navbar() {
         </nav>
       </motion.header>
 
-      {/* Mobile full-screen menu */}
       <MobileMenu
         isOpen={menuOpen}
         onClose={() => setMenuOpen(false)}
@@ -168,9 +161,6 @@ export function Navbar() {
   );
 }
 
-/* ──────────────────────────────────────────── */
-/* NavLink                                      */
-/* ──────────────────────────────────────────── */
 function NavLink({
   href,
   active,

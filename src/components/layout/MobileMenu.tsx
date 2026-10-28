@@ -16,14 +16,12 @@ interface MobileMenuProps {
 export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
-  // Focus first link on open
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => firstLinkRef.current?.focus(), 100);
     }
   }, [isOpen]);
 
-  // Focus trap
   useEffect(() => {
     if (!isOpen) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -47,7 +45,6 @@ export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="fixed inset-0 z-[60] bg-[var(--color-espresso)] flex flex-col"
         >
-          {/* Close button */}
           <div className="flex justify-between items-center px-6 py-5 border-b border-white/10">
             <span className="font-serif text-xl text-white font-semibold">
               Menu
@@ -61,7 +58,6 @@ export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
             </button>
           </div>
 
-          {/* Nav links */}
           <nav className="flex flex-col px-6 py-8 gap-1 flex-1">
             {navItems.map((item, i) => (
               <motion.div
@@ -88,7 +84,6 @@ export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
             ))}
           </nav>
 
-          {/* Footer in menu */}
           <div className="px-6 py-6 border-t border-white/10">
             <p className="text-white/40 text-sm">
               © 2026 Shri Siddh Hotel

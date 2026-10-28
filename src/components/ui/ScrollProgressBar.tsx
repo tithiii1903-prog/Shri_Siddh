@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-/** Thin gold scroll-progress bar at the top of the page */
 export function ScrollProgressBar() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 40 });

@@ -10,7 +10,6 @@ export function OurStory() {
     >
       <div className="container-site">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Text side */}
           <Reveal from="left">
             <div className="flex flex-col gap-5">
               <span className="label-text">Our Story</span>
@@ -39,7 +38,6 @@ export function OurStory() {
             </div>
           </Reveal>
 
-          {/* Image side */}
           <Reveal from="right" delay={0.15}>
             <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none">
               <Image
@@ -49,7 +47,6 @@ export function OurStory() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
-              {/* Gold accent line */}
               <div className="absolute -bottom-4 -left-4 w-24 h-24 border-2 border-[var(--color-gold)] -z-10" />
             </div>
           </Reveal>

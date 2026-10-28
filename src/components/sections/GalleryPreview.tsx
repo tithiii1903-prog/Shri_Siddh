@@ -14,7 +14,6 @@ interface GalleryItemData {
 }
 
 const galleryItems: GalleryItemData[] = [
-  // Row 1: Wide (2 cols), Portrait (1 col), Portrait (1 col)
   {
     src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793165771/home_page.png",
     alt: "Hotel facade and grand lobby entrance",
@@ -36,7 +35,6 @@ const galleryItems: GalleryItemData[] = [
     category: "Heritage",
     span: "lg:col-span-1",
   },
-  // Row 2: Portrait (1 col, 400x500), Portrait (1 col), Wide (2 cols)
   {
     src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167007/f867bf494ac30e8ad11e1c7e4e4c825dd0c205d9.png",
     alt: "Luxury bedroom suite with arched architectural headboard",
@@ -67,7 +65,6 @@ export function GalleryPreview() {
       aria-labelledby="gallery-heading"
     >
       <div className="container-site">
-        {/* Header matching Figma screenshot */}
         <div className="flex items-end justify-between gap-6 mb-8 md:mb-10 flex-wrap">
           <Reveal>
             <div>
@@ -92,7 +89,6 @@ export function GalleryPreview() {
           </Reveal>
         </div>
 
-        {/* 4-Column, 2-Row Grid with Kathy Kato Cursor-Tracking Animation */}
         <Reveal delay={0.15}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             {galleryItems.map((item, index) => (
@@ -105,10 +101,6 @@ export function GalleryPreview() {
   );
 }
 
-/* ─────────────────────────────────────────────────────────────
-   GalleryCard with Katherine Kato Cursor-Follow Animation
-   (https://codepen.io/kathykato/pen/KRQOKY)
-   ───────────────────────────────────────────────────────────── */
 function GalleryCard({ item }: { item: GalleryItemData }) {
   const cardRef = useRef<HTMLAnchorElement>(null);
   const [coords, setCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -133,7 +125,6 @@ function GalleryCard({ item }: { item: GalleryItemData }) {
       className={`relative group overflow-hidden block ${item.span} h-[260px] sm:h-[320px] lg:h-[360px] cursor-pointer bg-[#e8deca] shadow-xs`}
       aria-label={`${item.category}: ${item.title}`}
     >
-      {/* Zooming background image on hover */}
       <Image
         src={item.src}
         alt={item.alt}
@@ -142,10 +133,8 @@ function GalleryCard({ item }: { item: GalleryItemData }) {
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
       />
 
-      {/* Smooth dark vignette overlay on hover */}
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-colors duration-400" />
 
-      {/* Kathy Kato Cursor-Tracking Floating Badge (KRQOKY) */}
       <div
         className="absolute top-0 left-0 pointer-events-none z-20 transition-opacity duration-300 hidden md:block"
         style={{
@@ -164,7 +153,6 @@ function GalleryCard({ item }: { item: GalleryItemData }) {
         </div>
       </div>
 
-      {/* Mobile/Touch Fallback Label */}
       <div className="md:hidden absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-white">
         <span className="text-[10px] font-bold tracking-widest text-[#e8c872] uppercase block mb-0.5">
           {item.category}

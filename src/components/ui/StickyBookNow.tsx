@@ -1,19 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
-/** Floating "Book Now" button that appears after scrolling past the hero */
 export function StickyBookNow() {
   const [visible, setVisible] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     let ticking = false;
     const onScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          // Show after scrolling past 80% of viewport height (hero)
           setVisible(window.scrollY > window.innerHeight * 0.8);
           ticking = false;
         });
@@ -32,7 +32,7 @@ export function StickyBookNow() {
       const first = el.querySelector<HTMLElement>("button, input");
       setTimeout(() => first?.focus(), 600);
     } else {
-      window.location.href = "/#booking-bar";
+      router.push("/#booking-bar");
     }
   };
 

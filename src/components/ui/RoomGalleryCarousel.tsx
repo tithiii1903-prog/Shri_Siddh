@@ -24,9 +24,7 @@ export function RoomGalleryCarousel({ images, roomName }: RoomGalleryCarouselPro
 
   return (
     <section className="relative w-full bg-neutral-900 overflow-hidden pt-20 md:pt-24" aria-label="Room photo gallery">
-      {/* 2-photo display matching Image 2 */}
       <div className="relative h-[320px] sm:h-[420px] md:h-[480px] lg:h-[520px] w-full flex">
-        {/* Photo 1 (Main view) */}
         <div className="relative w-full md:w-1/2 h-full border-r border-black/20">
           <Image
             src={images[index]}
@@ -37,7 +35,6 @@ export function RoomGalleryCarousel({ images, roomName }: RoomGalleryCarouselPro
           />
         </div>
 
-        {/* Photo 2 (Side / bathroom view) — hidden on small mobile, visible on tablet+ */}
         <div className="relative hidden md:block md:w-1/2 h-full">
           <Image
             src={images[nextIndex]}
@@ -47,7 +44,6 @@ export function RoomGalleryCarousel({ images, roomName }: RoomGalleryCarouselPro
           />
         </div>
 
-        {/* Navigation arrows */}
         <button
           onClick={prev}
           aria-label="Previous image"
@@ -65,7 +61,6 @@ export function RoomGalleryCarousel({ images, roomName }: RoomGalleryCarouselPro
         </button>
       </div>
 
-      {/* Thumbnails indicator */}
       <div className="flex items-center justify-center gap-2 py-3 bg-[#1a1208]">
         {images.map((_, i) => (
           <button

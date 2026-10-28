@@ -2,11 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { facilities } from "@/data/services";
 import { Reveal } from "@/components/ui/Reveal";
-
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BedDouble, Users, Maximize2 } from "lucide-react";
-import { rooms, standardFacilities } from "@/data/rooms";
+import { rooms } from "@/data/rooms";
 import { RoomGalleryCarousel } from "@/components/ui/RoomGalleryCarousel";
 import { RoomCard } from "@/components/ui/RoomCard";
 
@@ -49,41 +47,32 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
     notFound();
   }
 
-  // Pre-filled WhatsApp enquiry message
   const whatsappUrl = `https://wa.me/911234567890?text=${encodeURIComponent(
     `Hi, I'd like to book the ${room.name} (₹${room.pricePerNight}/night) at Shri Siddh Hotel.`
   )}`;
 
-  // Other rooms to suggest (showing all other rooms or slice 3)
   const otherRooms = rooms.filter((r) => r.id !== room.id);
   const suggestedRooms = otherRooms.length >= 3 ? otherRooms.slice(0, 3) : rooms;
 
   return (
     <div className="bg-[#FAF8F5]">
-      {/* ──────────────── Top Hero Gallery Carousel ──────────────── */}
       <RoomGalleryCarousel images={room.gallery} roomName={room.name} />
 
-      {/* ──────────────── Main Content Section ──────────────── */}
       <div className="container-site py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          {/* ──────── Left Column (Main Details) ──────── */}
           <div className="lg:col-span-8 flex flex-col">
-            {/* Category */}
             <span className="text-xs uppercase tracking-wider text-neutral-500 font-semibold mb-1">
               {room.tier}
             </span>
 
-            {/* Title */}
             <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-900 tracking-tight mb-3">
               {room.name}
             </h1>
 
-            {/* Tagline */}
             <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-8">
               {room.tagline}
             </p>
 
-            {/* Room Overview */}
             <section className="mb-10">
               <h2 className="text-xl md:text-2xl font-bold text-neutral-900 mb-4 tracking-tight">
                 Room Overview
@@ -94,7 +83,6 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
               </div>
             </section>
 
-            {/* Room Facilities */}
             <section className="mb-12">
               <h2 className="text-xl md:text-2xl font-bold text-neutral-900 mb-2 tracking-tight">
                 Room Facilities
@@ -103,38 +91,35 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
                 Every room is designed to provide maximum comfort and convenience. These are accompanied by complimentary access to our hotel facilities:
               </p>
 
-              {/* 5 Facility Cards matching Image 2 */}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                        {facilities.map((facility, i) => (
-                          <Reveal key={facility.id} delay={i * 0.08} from="bottom">
-                            <div className="flex flex-col gap-3 group">
-                              <div className="relative aspect-[4/3] overflow-hidden">
-                                <Image
-                                  src={facility.image}
-                                  alt={facility.imageAlt}
-                                  fill
-                                  sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 20vw"
-                                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-                              </div>
-                              <div>
-                                <h3 className="font-semibold text-sm text-[var(--color-espresso)]">
-                                  {facility.name}
-                                </h3>
-                                <p className="text-xs text-[var(--color-brown-mid)] mt-1 leading-relaxed">
-                                  {facility.description}
-                                </p>
-                              </div>
-                            </div>
-                          </Reveal>
-                        ))}
+                {facilities.map((facility, i) => (
+                  <Reveal key={facility.id} delay={i * 0.08} from="bottom">
+                    <div className="flex flex-col gap-3 group">
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <Image
+                          src={facility.image}
+                          alt={facility.imageAlt}
+                          fill
+                          sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 20vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
                       </div>
+                      <div>
+                        <h3 className="font-semibold text-sm text-[var(--color-espresso)]">
+                          {facility.name}
+                        </h3>
+                        <p className="text-xs text-[var(--color-brown-mid)] mt-1 leading-relaxed">
+                          {facility.description}
+                        </p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
             </section>
 
-            {/* Room Rules & Regulations + Conclusion */}
             <section className="pt-8 border-t border-[#E8DCC4]">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-                {/* Left: Room Rules & Regulations */}
                 <div>
                   <h3 className="text-lg font-bold text-neutral-900 mb-4 tracking-tight">
                     Room Rules & Regulations
@@ -146,7 +131,6 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
                   </ul>
                 </div>
 
-                {/* Right: Conclusion */}
                 <div>
                   <h3 className="text-lg font-bold text-neutral-900 mb-4 tracking-tight">
                     Conclusion
@@ -160,10 +144,8 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
             </section>
           </div>
 
-          {/* ──────── Right Column (Sticky Booking Widget) ──────── */}
           <aside className="lg:col-span-4 lg:sticky lg:top-28">
             <div className="bg-[#FEF7EA] border border-[#EEDFCD] rounded-sm p-6 sm:p-8 flex flex-col gap-5 shadow-sm">
-              {/* Price */}
               <div className="flex items-baseline gap-1">
                 <span className="text-sm text-neutral-600 font-medium">Start</span>
                 <span className="font-serif text-3xl sm:text-4xl font-bold text-neutral-900 ml-1">
@@ -172,7 +154,6 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
                 <span className="text-xs text-neutral-500">/night</span>
               </div>
 
-              {/* Amenities icons summary */}
               <div className="flex items-center justify-between text-xs text-neutral-700 py-3 border-y border-[#E8DCC4]">
                 <span className="flex items-center gap-1.5 font-medium">
                   <Maximize2 size={15} strokeWidth={1.5} className="text-[#b8933f]" />
@@ -188,7 +169,6 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
                 </span>
               </div>
 
-              {/* Big Green WhatsApp Button */}
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -202,7 +182,6 @@ export default async function RoomDetailPage({ params }: RoomDetailPageProps) {
           </aside>
         </div>
 
-        {/* ──────────────── Other Rooms You May Like ──────────────── */}
         <section className="mt-20 pt-16 border-t border-[#E8DCC4]" aria-label="Other rooms you may like">
           <span className="text-xs font-semibold tracking-widest text-[#c9a96e] uppercase block mb-2">
             Rooms and Suites

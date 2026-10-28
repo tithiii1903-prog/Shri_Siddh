@@ -11,19 +11,16 @@ interface ModalProps {
   triggerRef?: React.RefObject<HTMLButtonElement | null>;
 }
 
-/** Accessible modal with focus trap, Esc key, and backdrop close */
 export function Modal({ isOpen, onClose, children, triggerRef }: ModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Focus the close button when opened
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => closeButtonRef.current?.focus(), 50);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
-      // Return focus to trigger
       triggerRef?.current?.focus();
     }
     return () => {
@@ -31,7 +28,6 @@ export function Modal({ isOpen, onClose, children, triggerRef }: ModalProps) {
     };
   }, [isOpen, triggerRef]);
 
-  // Esc key close
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -60,16 +56,16 @@ export function Modal({ isOpen, onClose, children, triggerRef }: ModalProps) {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-4xl"
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-full max-w-4xl bg-black overflow-hidden shadow-2xl"
           >
             <button
               ref={closeButtonRef}
               onClick={onClose}
               aria-label="Close modal"
-              className="absolute -top-10 right-0 text-white/80 hover:text-white transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 text-white/70 hover:text-white bg-black/50 rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-white cursor-pointer"
             >
-              <X size={24} />
+              <X size={20} />
             </button>
             {children}
           </motion.div>

@@ -17,7 +17,6 @@ export default function ContactPage() {
     e.preventDefault();
     if (!formData.name.trim()) return;
 
-    // Build prefilled WhatsApp message
     const waText = `Hi Shri Siddh Hotel,%0A%0AMy name: ${encodeURIComponent(formData.name)}%0AMobile: ${encodeURIComponent(formData.phone || "Not provided")}%0ADates: ${encodeURIComponent(formData.dates || "Not specified")}%0AMessage: ${encodeURIComponent(formData.message || "Enquiry")}`;
     window.open(`https://wa.me/911234567890?text=${waText}`, "_blank");
     setSubmitted(true);
@@ -25,9 +24,7 @@ export default function ContactPage() {
 
   return (
     <div className="bg-[#FAF9F5]">
-      {/* ──────────────── 1. Hero Banner ──────────────── */}
       <section className="relative min-h-[420px] md:min-h-[500px] flex items-end justify-between overflow-hidden pt-28 pb-12 md:pb-16">
-        {/* Background Lobby Grand Atrium */}
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1920&q=85"
@@ -36,14 +33,11 @@ export default function ContactPage() {
             priority
             className="object-cover object-center"
           />
-          {/* Dark luxury gradient overlays matching Image 2 */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/45" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
         </div>
 
-        {/* Hero Content */}
         <div className="container-site relative z-10 w-full flex flex-col md:flex-row md:items-end justify-between gap-8">
-          {/* Left Title Box */}
           <div className="max-w-xl">
             <span className="inline-block text-xs md:text-sm font-semibold tracking-widest text-[#c9a96e] uppercase mb-3">
               Get In Touch
@@ -59,7 +53,6 @@ export default function ContactPage() {
             </p>
           </div>
 
-          {/* Right Ratings Strip matching Image 2 */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 bg-black/40 backdrop-blur-md px-5 py-3 border border-white/15">
             <div className="flex items-center gap-2">
               <div className="flex items-center text-[#c9a96e]">
@@ -85,11 +78,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ──────────────── 2. Contact Info & Enquiry Form ──────────────── */}
       <section className="py-20 md:py-28" aria-label="Contact information and enquiry form">
         <div className="container-site">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            {/* Left Column: Contact Details */}
             <div className="lg:col-span-5 flex flex-col">
               <span className="text-xs uppercase tracking-wider text-neutral-500 font-semibold mb-2 block">
                 Shri Siddh
@@ -129,7 +120,6 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Right Column: Enquiry Form Card */}
             <div className="lg:col-span-7">
               <div className="bg-[#FFF8E7] border border-[#EEDFCD] p-8 sm:p-12 shadow-sm">
                 {submitted ? (
@@ -150,7 +140,6 @@ export default function ContactPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                    {/* Your Name */}
                     <div className="flex flex-col">
                       <label className="text-xs font-semibold text-neutral-700 mb-2">
                         Your Name
@@ -165,7 +154,6 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    {/* WhatsApp / Mobile Number */}
                     <div className="flex flex-col">
                       <label className="text-xs font-semibold text-neutral-700 mb-2">
                         Your WhatsApp / Mobile Number
@@ -180,7 +168,6 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    {/* Check In - Check Out Date */}
                     <div className="flex flex-col">
                       <label className="text-xs font-semibold text-neutral-700 mb-2">
                         Check In - Check Out Date
@@ -194,7 +181,6 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    {/* Message */}
                     <div className="flex flex-col">
                       <label className="text-xs font-semibold text-neutral-700 mb-2">
                         Message
@@ -208,7 +194,6 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    {/* Submit Button */}
                     <div className="pt-4">
                       <button
                         type="submit"
@@ -226,7 +211,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ──────────────── 3. Location Map ──────────────── */}
       <section className="pb-20 md:pb-28" aria-label="Hotel Location Map">
         <div className="container-site">
           <div className="relative w-full h-[360px] sm:h-[440px] md:h-[500px] overflow-hidden border border-[#EEDFCD] shadow-sm">

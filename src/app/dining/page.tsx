@@ -53,9 +53,7 @@ export default function DiningPage() {
 
   return (
     <div className="bg-[#FAF9F5]">
-      {/* ──────────────── Hero Banner ──────────────── */}
       <section className="relative min-h-[380px] md:min-h-[480px] flex items-center justify-start overflow-hidden pt-28 pb-16">
-        {/* Culinary flat-lay background */}
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1920&q=85"
@@ -64,25 +62,20 @@ export default function DiningPage() {
             priority
             className="object-cover object-center"
           />
-          {/* Dark luxury gradient overlays matching Image 1 */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/35" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/45" />
         </div>
 
-        {/* Hero Content */}
         <div className="container-site relative z-10 w-full">
           <div className="max-w-2xl">
-            {/* Tag */}
             <span className="inline-block text-xs md:text-sm font-semibold tracking-widest text-[#c9a96e] uppercase mb-3">
               The Restaurant
             </span>
 
-            {/* Title */}
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-4">
               Cooking Worth Coming Down For
             </h1>
 
-            {/* Subtitle */}
             <p className="text-white/85 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-xl">
               Seasonal ingredients, local producers, and a dining room open from breakfast through dinner, seven days a week.
             </p>
@@ -90,7 +83,6 @@ export default function DiningPage() {
         </div>
       </section>
 
-      {/* ──────────────── Timings Bar ──────────────── */}
       <section className="py-12 md:py-16 bg-[#FAF9F5] border-b border-[#EEDFCD]" aria-label="Restaurant Hours">
         <div className="container-site">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
@@ -112,11 +104,9 @@ export default function DiningPage() {
         </div>
       </section>
 
-      {/* ──────────────── Private Dining Feature ──────────────── */}
       <section className="py-20 md:py-32 bg-[#FAF9F5]" aria-label="Private Dining">
         <div className="container-site">
           <div className="relative">
-            {/* Main Feature Image (Booth seating couple) */}
             <div className="relative w-full md:w-3/4 h-[360px] sm:h-[460px] md:h-[540px] overflow-hidden shadow-xs border border-[#EDE4D5]">
               <Image
                 src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=1400&q=80"
@@ -126,7 +116,6 @@ export default function DiningPage() {
               />
             </div>
 
-            {/* Overlapping Floating Card on the Right (matching Image 1) */}
             <div className="mt-8 md:mt-0 md:absolute md:right-0 md:top-12 md:w-5/12 z-10 bg-[#FFF8E7] border border-[#EEDFCD] p-8 sm:p-10 shadow-lg">
               <span className="text-xs uppercase tracking-wider text-neutral-600 font-medium mb-3 block">
                 Private Dining
