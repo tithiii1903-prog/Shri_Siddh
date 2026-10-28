@@ -26,7 +26,7 @@ export function VideoSection() {
           observer.disconnect();
         }
       },
-      { rootMargin: "300px" }
+      { rootMargin: "0px" }
     );
 
     if (sectionRef.current) {
