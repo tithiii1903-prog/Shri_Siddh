@@ -6,10 +6,10 @@ import { Play, Pause, Volume2, VolumeX, Maximize2 } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
 import { motion } from "framer-motion";
 
-// Luxury hotel experience ambient showcase video
-const VIDEO_ID = "Pj_79VzC2l4";
-const AUTOPLAY_EMBED = `https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1`;
-const FULL_VIDEO = `https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&rel=0`;
+// Luxury hotel room walkthrough ambient showcase video (The Capitol Kempinski Hotel | The Terrace Room)
+const VIDEO_ID = "u6QDeejM0M4";
+const AUTOPLAY_EMBED = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1`;
+const FULL_VIDEO = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0`;
 
 export function VideoSection() {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -50,7 +50,8 @@ export function VideoSection() {
           src={AUTOPLAY_EMBED}
           title="Shri Siddh Hotel room walkthrough video"
           className="w-full h-full object-cover"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
           tabIndex={-1}
         />
       </div>
@@ -120,7 +121,8 @@ export function VideoSection() {
               src={FULL_VIDEO}
               title="Shri Siddh Hotel cinematic experience"
               className="absolute inset-0 w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
             />
           )}
