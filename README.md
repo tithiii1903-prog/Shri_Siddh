@@ -180,8 +180,3 @@ npm run start
 
 ---
 
-## 👨‍💻 Key Takeaways for the Interviewer
-
-- **Architectural Discipline**: Clear separation of presentation, business logic, and data mock layers for straightforward migration to headless CMSs (e.g., Sanity, Strapi, or Contentful).
-- **Attention to Detail**: Strict adherence to design specifications, font pairings, spacing scales, and micro-interactions.
-- **Modern React 19 Proficiency**: Resolves hydration pitfalls and SSR edge-cases cleanly using native web and React APIs (`useSyncExternalStore`, Partial Prerendering, proper event boundaries).
