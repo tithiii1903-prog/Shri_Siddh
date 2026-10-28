@@ -63,4 +63,20 @@ export const reviews: Review[] = [
     rating: 5,
     text: "Perfect escape from the city. Everything about the stay was considered and the staff truly goes above and beyond.",
   },
+  {
+    id: "review-6",
+    author: "Elena Rostova",
+    location: "Vienna, Austria",
+    room: "Penthouse Suite",
+    rating: 5,
+    text: "From the architecture to the warm hospitality, every detail is refined and memorable. The private dining was extraordinary.",
+  },
+  {
+    id: "review-7",
+    author: "David Chen",
+    location: "Singapore",
+    room: "Classic Room",
+    rating: 5,
+    text: "Exceeded all expectations. Quiet sanctuary amidst the city with exceptional dining and serene ambient design.",
+  },
 ];

@@ -1,84 +1,112 @@
 "use client";
-
-import { useState } from "react";
+import Link from "next/link";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { Star, X } from "lucide-react";
+import { Reveal } from "@/components/ui/Reveal";
 
-interface GalleryImage {
+
+
+interface GalleryItemData {
   src: string;
   alt: string;
+  title: string;
   category: string;
+  span: string;
 }
 
-const galleryItems: GalleryImage[] = [
-  // Row 1
+const galleryItems: GalleryItemData[] = [
+  // Row 1: Wide (2 cols), Portrait (1 col), Portrait (1 col)
   {
-    src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=85",
-    alt: "Hotel reception lobby with green sofa and warm lighting at Shri Siddh",
-    category: "Lobby",
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793165771/home_page.png",
+    alt: "Hotel facade and grand lobby entrance",
+    title: "Grand Entrance Facade",
+    category: "Architecture",
+    span: "lg:col-span-2",
   },
   {
-    src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=85",
-    alt: "Guest enjoying morning relaxation in luxury suite at Shri Siddh",
-    category: "Suites",
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167009/f557dfe8d3ad7219040e44f89e2c7a418cf90249.png",
+    alt: "Modern line art mural with warm ambient lighting",
+    title: "Modern Line Art Mural",
+    category: "Art & Interior",
+    span: "lg:col-span-1",
   },
   {
-    src: "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=900&q=85",
-    alt: "Grand dining hall with chandelier and polished parquet floor at Shri Siddh",
-    category: "Dining",
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167009/6eb111dfea57e66dea96952dd01fd7416042e003.png",
+    alt: "Shri Siddh golden wall emblem and indoor botanical garden",
+    title: "Shri Siddh Emblem",
+    category: "Heritage",
+    span: "lg:col-span-1",
   },
-  // Row 2
+  // Row 2: Portrait (1 col, 400x500), Portrait (1 col), Wide (2 cols)
   {
-    src: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=900&q=85",
-    alt: "Overhead view of resort pool and sun loungers at Shri Siddh",
-    category: "Pool",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=900&q=85",
-    alt: "Artisan bedside styling with orchid and woven lantern at Shri Siddh",
-    category: "Interior",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=85",
-    alt: "Spacious master bedroom with king bed and panoramic windows at Shri Siddh",
-    category: "Rooms",
-  },
-  // Row 3
-  {
-    src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=85",
-    alt: "Hotel reception lobby and luggage concierge at Shri Siddh",
-    category: "Lobby",
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167007/f867bf494ac30e8ad11e1c7e4e4c825dd0c205d9.png",
+    alt: "Luxury bedroom suite with arched architectural headboard",
+    title: "Signature Bedroom Suite",
+    category: "Accommodations",
+    span: "lg:col-span-1",
   },
   {
-    src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=85",
-    alt: "Serene bedroom sanctuary with classic draped curtains at Shri Siddh",
-    category: "Suites",
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167007/ad2c359eaad5943264ed56aa58fb48ec8ac62836.png",
+    alt: "3D sculpted relief faces wall with illuminated granite staircase",
+    title: "Sculpted Relief Wall",
+    category: "Art & Design",
+    span: "lg:col-span-1",
   },
   {
-    src: "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=900&q=85",
-    alt: "Fine dining ambiance with banquet seating at Shri Siddh",
-    category: "Dining",
-  },
-  // Row 4
-  {
-    src: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=900&q=85",
-    alt: "Tropical poolside oasis and relaxation loungers at Shri Siddh",
-    category: "Pool",
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167007/e11155825a8d31c336dddc8ececd703d3ec0e8a3.png",
+    alt: "Grand dining room with velvet banquet seating and ornamental moldings",
+    title: "Grand Dining Hall",
+    category: "Fine Dining",
+    span: "lg:col-span-2",
   },
   {
-    src: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=900&q=85",
-    alt: "Warm handcrafted bedside details and luxury linens at Shri Siddh",
-    category: "Interior",
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793165771/home_page.png",
+    alt: "Hotel facade and grand lobby entrance",
+    title: "Grand Entrance Facade",
+    category: "Architecture",
+    span: "lg:col-span-2",
   },
   {
-    src: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=85",
-    alt: "Grand luxury bedroom layout with ambient bedside illumination at Shri Siddh",
-    category: "Rooms",
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167009/f557dfe8d3ad7219040e44f89e2c7a418cf90249.png",
+    alt: "Modern line art mural with warm ambient lighting",
+    title: "Modern Line Art Mural",
+    category: "Art & Interior",
+    span: "lg:col-span-1",
+  },
+  {
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167009/6eb111dfea57e66dea96952dd01fd7416042e003.png",
+    alt: "Shri Siddh golden wall emblem and indoor botanical garden",
+    title: "Shri Siddh Emblem",
+    category: "Heritage",
+    span: "lg:col-span-1",
+  },
+  // Row 2: Portrait (1 col, 400x500), Portrait (1 col), Wide (2 cols)
+  {
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167007/f867bf494ac30e8ad11e1c7e4e4c825dd0c205d9.png",
+    alt: "Luxury bedroom suite with arched architectural headboard",
+    title: "Signature Bedroom Suite",
+    category: "Accommodations",
+    span: "lg:col-span-1",
+  },
+  {
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167007/ad2c359eaad5943264ed56aa58fb48ec8ac62836.png",
+    alt: "3D sculpted relief faces wall with illuminated granite staircase",
+    title: "Sculpted Relief Wall",
+    category: "Art & Design",
+    span: "lg:col-span-1",
+  },
+  {
+    src: "https://res.cloudinary.com/dgsjdegrj/image/upload/v1793167007/e11155825a8d31c336dddc8ececd703d3ec0e8a3.png",
+    alt: "Grand dining room with velvet banquet seating and ornamental moldings",
+    title: "Grand Dining Hall",
+    category: "Fine Dining",
+    span: "lg:col-span-2",
   },
 ];
 
 export default function GalleryPage() {
-  const [activePhoto, setActivePhoto] = useState<GalleryImage | null>(null);
+  const [activePhoto, setActivePhoto] = useState<GalleryItemData | null>(null);
 
   return (
     <div className="bg-[#FAF9F5]">
@@ -148,35 +176,13 @@ export default function GalleryPage() {
 
       {/* ──────────────── Photo Mosaic Grid ──────────────── */}
       <section className="py-16 md:py-24" aria-label="Photo Gallery Grid">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {galleryItems.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => setActivePhoto(item)}
-                className="group relative h-[320px] sm:h-[360px] md:h-[400px] w-full overflow-hidden cursor-pointer border border-[#EFE7DC] shadow-xs"
-              >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-
-                {/* Subtle dark hover overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300" />
-
-                {/* Category badge appearing on hover */}
-                <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-white text-xs font-medium tracking-wide">
-                    {item.category}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <Reveal delay={0.15}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+                    {galleryItems.map((item, index) => (
+                      <GalleryCard key={index} item={item} />
+                    ))}
+                  </div>
+                </Reveal>
       </section>
 
       {/* ──────────────── Lightbox Modal ──────────────── */}
@@ -215,5 +221,72 @@ export default function GalleryPage() {
         </div>
       )}
     </div>
+  );
+}
+function GalleryCard({ item }: { item: GalleryItemData }) {
+  const cardRef = useRef<HTMLAnchorElement>(null);
+  const [coords, setCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setCoords({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <Link
+      href="/gallery"
+      ref={cardRef}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
+      className={`relative group overflow-hidden block ${item.span} h-[260px] sm:h-[320px] lg:h-[360px] cursor-pointer bg-[#e8deca] shadow-xs`}
+      aria-label={`${item.category}: ${item.title}`}
+    >
+      {/* Zooming background image on hover */}
+      <Image
+        src={item.src}
+        alt={item.alt}
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+      />
+
+      {/* Smooth dark vignette overlay on hover */}
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-colors duration-400" />
+
+      {/* Kathy Kato Cursor-Tracking Floating Badge (KRQOKY) */}
+      <div
+        className="absolute top-0 left-0 pointer-events-none z-20 transition-opacity duration-300 hidden md:block"
+        style={{
+          opacity: isHovered ? 1 : 0,
+          transform: `translate3d(${coords.x}px, ${coords.y}px, 0)`,
+          willChange: "transform",
+        }}
+      >
+        <div className="-translate-x-1/2 -translate-y-1/2 bg-white/95 backdrop-blur-md px-4 py-2.5 shadow-2xl border border-white/60 text-left min-w-[170px]">
+          <span className="text-[10px] font-bold tracking-widest text-[#b8933f] uppercase block mb-0.5">
+            {item.category}
+          </span>
+          <h3 className="text-sm font-semibold text-[#1a1208] leading-tight">
+            {item.title}
+          </h3>
+        </div>
+      </div>
+
+      {/* Mobile/Touch Fallback Label */}
+      <div className="md:hidden absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-white">
+        <span className="text-[10px] font-bold tracking-widest text-[#e8c872] uppercase block mb-0.5">
+          {item.category}
+        </span>
+        <h3 className="text-sm font-semibold text-white leading-tight">
+          {item.title}
+        </h3>
+      </div>
+    </Link>
   );
 }

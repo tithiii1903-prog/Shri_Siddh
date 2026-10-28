@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
@@ -35,27 +36,21 @@ export function Footer() {
       role="contentinfo"
     >
       <div className="container-site py-16">
-        {/* Centered Brand Logo */}
+        {/* Centered Golden Brand Logo matching Image 3 */}
         <div className="flex flex-col items-center justify-center mb-12">
           <Link
             href="/"
-            className="inline-flex items-center gap-3 group"
+            className="inline-flex items-center justify-center group"
             aria-label="Shri Siddh — home"
           >
-            <svg width="34" height="34" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <circle cx="16" cy="16" r="15" stroke="#b8933f" strokeWidth="1.5" />
-              <path
-                d="M21 11.5C21 9.57 19.43 8 17.5 8H12v5.5h9V11.5ZM11 16.5C11 18.43 12.57 20 14.5 20H20v-5.5H11V16.5ZM12 20v4h8"
-                stroke="#b8933f"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
-            </svg>
-            <span className="font-serif text-2xl font-bold text-[#b8933f] tracking-wide">
-              Shri Siddh
-            </span>
+            <Image
+              src="/logo_gold.png"
+              alt="Shri Siddh"
+              width={220}
+              height={50}
+              priority
+              className="h-10 sm:h-12 w-auto object-contain hover:opacity-90 transition-opacity"
+            />
           </Link>
         </div>
 

@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { navLeft, navRight } from "@/data/navigation";
 import { cn } from "@/lib/utils";
+import { MobileMenu } from "./MobileMenu";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -98,13 +100,25 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Logo — centered on desktop */}
+          {/* Logo — centered on desktop (using user requested /logo.png) */}
           <Link
             href="/"
             className="flex items-center gap-2.5 lg:absolute lg:left-1/2 lg:-translate-x-1/2"
             aria-label="Shri Siddh — return to homepage"
           >
-            <ShriSiddhLogo scrolled={solidNav} />
+            <div className="flex flex-col items-center">
+              <Image
+                src="/logo_footer.png"
+                alt="Shri Siddh"
+                width={150}
+                height={38}
+                priority
+                className={cn(
+                  "h-8 md:h-9 w-auto object-contain transition-all duration-300",
+                  !solidNav && "brightness-0 invert"
+                )}
+              />
+            </div>
           </Link>
 
           {/* Right links — desktop only */}
@@ -186,69 +200,3 @@ function NavLink({
     </Link>
   );
 }
-
-/* ──────────────────────────────────────────── */
-/* SVG Logo                                     */
-/* ──────────────────────────────────────────── */
-function ShriSiddhLogo({ scrolled }: { scrolled: boolean }) {
-  const textColor = scrolled ? "#1a1208" : "#ffffff";
-  const dotColor = scrolled ? "rgba(26, 18, 8, 0.4)" : "rgba(255, 255, 255, 0.65)";
-  const centerDotColor = scrolled ? "#b8933f" : "rgba(255, 255, 255, 0.95)";
-
-  return (
-    <div className="flex flex-col items-center">
-      <div className="flex items-center gap-2.5">
-        {/* Dual curved wave monogram matching Figma */}
-        <svg
-          width="30"
-          height="30"
-          viewBox="0 0 36 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          className="shrink-0"
-        >
-          <path
-            d="M8 20C8 13.3726 13.3726 8 20 8C23.5 8 26.5 9.5 28 12C28 12 25.5 12.5 24 13.5C21 15.5 18 18 14 20C10 22 8 20 8 20Z"
-            fill={textColor}
-          />
-          <path
-            d="M28 16C28 22.6274 22.6274 28 16 28C12.5 28 9.5 26.5 8 24C8 24 10.5 23.5 12 22.5C15 20.5 18 18 22 16C26 14 28 16 28 16Z"
-            fill={textColor}
-          />
-        </svg>
-        <span
-          style={{ color: textColor }}
-          className="font-serif text-xl font-bold tracking-wide leading-none transition-colors duration-300"
-        >
-          Shri Siddh
-        </span>
-      </div>
-
-      {/* Dotted pearl accent beneath logo from Figma */}
-      <div className="flex items-center justify-center gap-1.5 mt-1.5" aria-hidden="true">
-        {[-7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7].map((offset) => {
-          const isCenter = offset === 0;
-          const isMid = Math.abs(offset) <= 2;
-          return (
-            <span
-              key={offset}
-              className="rounded-full inline-block transition-colors duration-300"
-              style={{
-                width: isCenter ? "5px" : isMid ? "4px" : "3px",
-                height: isCenter ? "5px" : isMid ? "4px" : "3px",
-                backgroundColor: isCenter ? centerDotColor : dotColor,
-                opacity: Math.max(0.3, 1 - Math.abs(offset) * 0.08),
-              }}
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-/* ──────────────────────────────────────────── */
-/* MobileMenu                                   */
-/* ──────────────────────────────────────────── */
-import { MobileMenu } from "./MobileMenu";
